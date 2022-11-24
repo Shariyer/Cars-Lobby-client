@@ -36,10 +36,11 @@ const Register = () => {
         };
         UpdateUserProfile(userInfo)
           .then(() => {
+            userInfoToDb(data.email, data.name, data.userType);
             // navigate("/");
             //   save user info in database here
             //   setCreatedUserEmail and will add it on save of database
-            setCreatedUserEmail(data.email);
+            HTMLFormElement.reset();
           })
           .catch((err) => console.log(err));
       })
@@ -48,6 +49,28 @@ const Register = () => {
         setRegistrationError(error.message);
       });
   };
+  // saving data to database
+  const userInfoToDb = (email, name, userType) => {
+    const user = {
+      name,
+      email,
+      userType,
+    };
+    fetch("http://localhost:5000/users", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(user),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.acknowledged) {
+          setCreatedUserEmail(email);
+        }
+      });
+  };
+
   return (
     <div className="hero mt-5">
       <div className="hero-content flex-col ">
