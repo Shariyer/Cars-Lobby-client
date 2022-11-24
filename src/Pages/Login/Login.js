@@ -34,7 +34,8 @@ const Login = () => {
       .then((result) => {
         const user = result.user;
         console.log(user);
-        setLoggedinUserEmail(data.email);
+        userInfoToDb(data.name, data.email, data.userType);
+        toast.success("You successfully Logged In");
       })
       .catch((error) => {
         console.log(error.message);
@@ -48,9 +49,43 @@ const Login = () => {
       .then((result) => {
         const user = result.user;
         console.log("Google Logged in user :", user);
+        fetch(`http://localhost:5000/users?email=${user?.email}`)
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.length > 0) {
+              console.log("user found");
+              setLoggedinUserEmail(user?.email);
+            } else {
+              console.log("user not found");
+              userInfoToDb(user?.displayName, user?.email, "buyer");
+            }
+          })
+          .catch((err) => console.log(err));
         toast.success("You successfully Logged In");
       })
       .catch((err) => console.log(err));
+  };
+  const userInfoToDb = (name, email, userType) => {
+    const user = {
+      name,
+      email,
+      userType,
+    };
+    console.log("inside db", user);
+    fetch("http://localhost:5000/users", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(user),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.acknowledged) {
+          setLoggedinUserEmail(email);
+        }
+      });
   };
   return (
     <div className="hero">

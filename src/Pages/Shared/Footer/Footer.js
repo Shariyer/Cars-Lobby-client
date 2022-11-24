@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <footer className="footer footer-center p-10 bg-black text-primary-content">
+    <footer className="footer footer-center p-10 bg-base-100 shadow-2xl text-primary-content">
       <div>
         <svg
           width="50"

@@ -1,15 +1,17 @@
 /** @format */
 
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { authContext } from "../../../ContextProvider/ContextProvider";
 
 const Navbar = () => {
   const { user, LogOut } = useContext(authContext);
+  const navigate = useNavigate();
   const handleLogOut = () => {
     LogOut()
       .then(() => {
-        localStorage.removeItem("carsLobbyToken");
+        localStorage?.removeItem("carsLobbyToken");
+        navigate("/login");
       })
       .catch((err) => console.log(err));
   };
