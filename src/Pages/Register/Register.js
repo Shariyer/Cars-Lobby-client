@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { authContext } from "../../ContextProvider/ContextProvider";
+import useToken from "../../Hooks/useToken/useToken";
 
 const Register = () => {
   const {
@@ -15,12 +16,12 @@ const Register = () => {
   const { CreatingUserWithEP, UpdateUserProfile } = useContext(authContext);
   const [registrationError, setRegistrationError] = useState("");
   const navigate = useNavigate();
-  //   const [createdUserEmail, setCreatedUserEmail] = useState("");
-  //   const [token] = useToken(createdUserEmail);
+  const [createdUserEmail, setCreatedUserEmail] = useState("");
+  const [token] = useToken(createdUserEmail);
 
-  //   if (token) {
-  //     navigate("/");
-  //   }
+  if (token) {
+    navigate("/");
+  }
 
   const handleSignUp = (data) => {
     setRegistrationError("");
@@ -35,7 +36,10 @@ const Register = () => {
         };
         UpdateUserProfile(userInfo)
           .then(() => {
-            navigate("/");
+            // navigate("/");
+            //   save user info in database here
+            //   setCreatedUserEmail and will add it on save of database
+            setCreatedUserEmail(data.email);
           })
           .catch((err) => console.log(err));
       })

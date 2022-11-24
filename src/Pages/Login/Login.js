@@ -5,6 +5,8 @@ import { useForm } from "react-hook-form";
 import { useLocation, useNavigate } from "react-router-dom";
 import { authContext } from "../../ContextProvider/ContextProvider";
 import { FcGoogle } from "react-icons/fc";
+import useToken from "../../Hooks/useToken/useToken";
+import toast from "react-hot-toast";
 
 const Login = () => {
   const {
@@ -13,10 +15,16 @@ const Login = () => {
     handleSubmit,
   } = useForm();
   const { LoginWithEP, GoogleLogin } = useContext(authContext);
+  const [loggedinUserEmail, setLoggedinUserEmail] = useState("");
   const [loginError, setLoginError] = useState("");
   const location = useLocation();
   const navigate = useNavigate();
   const from = location?.state?.from?.pathname || "/";
+  // custom hook
+  const [token] = useToken(loggedinUserEmail);
+  if (token) {
+    navigate(from, { replace: true });
+  }
 
   //  handle login submit
   const handleLogin = (data) => {
@@ -26,7 +34,7 @@ const Login = () => {
       .then((result) => {
         const user = result.user;
         console.log(user);
-        navigate(from, { replace: true });
+        setLoggedinUserEmail(data.email);
       })
       .catch((error) => {
         console.log(error.message);
@@ -39,9 +47,8 @@ const Login = () => {
     GoogleLogin()
       .then((result) => {
         const user = result.user;
-
-        // navigate(from, { replace: true });
         console.log("Google Logged in user :", user);
+        toast.success("You successfully Logged In");
       })
       .catch((err) => console.log(err));
   };

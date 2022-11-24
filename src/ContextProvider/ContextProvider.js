@@ -12,6 +12,7 @@ import {
   updateProfile,
 } from "firebase/auth";
 import app from "../Firebase/Firebase.config";
+import Loading from "../Pages/Loading/Loading";
 
 // creating context provider\
 export const authContext = createContext();
@@ -27,7 +28,7 @@ const ContextProvider = ({ children }) => {
     setLoading(true);
     // here we gonna load the loading button
     if (loading) {
-      return <button className="btn btn-square loading p-10"></button>;
+      return <Loading />;
     }
     return createUserWithEmailAndPassword(auth, email, password);
   };
@@ -36,7 +37,7 @@ const ContextProvider = ({ children }) => {
     setLoading(true);
     //we gonna load the loading button
     if (loading) {
-      return <button className="btn btn-square loading p-10"></button>;
+      return <Loading />;
     }
     return signInWithEmailAndPassword(auth, email, password);
   };
@@ -45,7 +46,7 @@ const ContextProvider = ({ children }) => {
 
     // here we gonna load the loading button
     if (loading) {
-      return <button className="btn btn-square loading p-10"></button>;
+      return <Loading />;
     }
     return signOut(auth);
   };
@@ -56,7 +57,7 @@ const ContextProvider = ({ children }) => {
     if (loading) {
       return (
         <div className="flex justify-center items-center">
-          <button className="btn btn-square loading p-10"></button>
+          <Loading />
         </div>
       );
     }
