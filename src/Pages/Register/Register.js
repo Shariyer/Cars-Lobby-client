@@ -15,6 +15,12 @@ const Register = () => {
   const { CreatingUserWithEP, UpdateUserProfile } = useContext(authContext);
   const [registrationError, setRegistrationError] = useState("");
   const navigate = useNavigate();
+  //   const [createdUserEmail, setCreatedUserEmail] = useState("");
+  //   const [token] = useToken(createdUserEmail);
+
+  //   if (token) {
+  //     navigate("/");
+  //   }
 
   const handleSignUp = (data) => {
     setRegistrationError("");
