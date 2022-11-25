@@ -16,10 +16,7 @@ const Products = () => {
       </h3>
       <div className="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-5">
         {products.map((product) => (
-          <div
-            key={product._id}
-            className="car relative rounded-2xl shadow-2xl"
-          >
+          <div key={product._id} className="car rounded-2xl shadow-2xl">
             <figure className="px-10 pt-10">
               <img
                 src={product?.img}
@@ -29,14 +26,20 @@ const Products = () => {
             </figure>
             <div className="card-body items-center text-white text-center">
               <div className="flex justify-evenly items-center">
-                <h2 className="card-title text-white">{product?.name}</h2>
-                <h4 className="flex items-center absolute right-10">
-                  Whitelist <MdFavoriteBorder />
+                <h4 className="flex items-center mr-5">
+                  Whitelist{" "}
+                  <p className="ml-2">
+                    <MdFavoriteBorder />
+                  </p>
                 </h4>
-                <h4 className="flex items-center mr-1 absolute bottom-1/4 right-10">
-                  Report <FaFontAwesomeFlag />
+                <h4 className="flex items-center ">
+                  Report{" "}
+                  <p className="ml-2">
+                    <FaFontAwesomeFlag />
+                  </p>
                 </h4>
               </div>
+              <h2 className="card-title text-white">{product?.name}</h2>
               <p className="text-red-500">
                 Original Price : {product?.originalPrice}$
               </p>
