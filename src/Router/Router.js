@@ -14,6 +14,7 @@ import AllSellers from "../Pages/Dashboard/AllSellers/AllSellers";
 import AllBuyers from "../Pages/Dashboard/AllBuyers/AllBuyers";
 import DashboardLayout from "../Layout/DashboardLayout";
 import ProductCategories from "../Pages/Home/ProductCategories/ProductCategories";
+import Products from "../Pages/Home/ProductCategories/Products/Products";
 
 const router = createBrowserRouter([
   {
@@ -37,8 +38,14 @@ const router = createBrowserRouter([
         element: <AboutUs></AboutUs>,
       },
       {
-        path: "/productCategories",
-        element: <ProductCategories />,
+        path: "/category/:category",
+        loader: async ({ params }) =>
+          fetch(`http://localhost:5000/cars?categoryName=${params.category}`),
+        element: (
+          <PrivateRouter>
+            <Products />
+          </PrivateRouter>
+        ),
       },
     ],
   },
