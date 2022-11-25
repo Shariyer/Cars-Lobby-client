@@ -1,13 +1,15 @@
 /** @format */
 
-import React from "react";
+import React, { useState } from "react";
 import { useLoaderData } from "react-router-dom";
 import { MdFavoriteBorder } from "react-icons/md";
 import { FaFontAwesomeFlag } from "react-icons/fa";
+import ProductsModal from "./ProductsModal/ProductsModal";
 
 const Products = () => {
   const products = useLoaderData();
-  //   console.log("products are:", products);
+  const [productModalData, setProductModalData] = useState(null);
+  console.log("products are:", products);
   return (
     <div className="py-10 px-10">
       <h3 className="text-center font-bold text-3xl text-white">
@@ -26,13 +28,13 @@ const Products = () => {
             </figure>
             <div className="card-body items-center text-white text-center">
               <div className="flex justify-evenly items-center">
-                <h4 className="flex items-center mr-5">
+                <h4 className="flex items-center mr-5 hover:text-black hover:cursor-pointer">
                   Whitelist{" "}
                   <p className="ml-2">
                     <MdFavoriteBorder />
                   </p>
                 </h4>
-                <h4 className="flex items-center ">
+                <h4 className="flex items-center hover:text-black hover:cursor-pointer">
                   Report{" "}
                   <p className="ml-2">
                     <FaFontAwesomeFlag />
@@ -50,12 +52,24 @@ const Products = () => {
               <p>Used : {product?.usage}</p>
               <p>Seller : {product?.sellerName}</p>
               <div className="card-actions">
-                <button className="btn btn-primary">BOOK Now</button>
+                <label
+                  onClick={() => setProductModalData(product)}
+                  htmlFor="product-booking-modal"
+                  className="btn btn-primary"
+                >
+                  BOOK NOW
+                </label>
               </div>
             </div>
           </div>
         ))}
       </div>
+      {productModalData && (
+        <ProductsModal
+          productModalData={productModalData}
+          setProductModalData={setProductModalData}
+        ></ProductsModal>
+      )}
     </div>
   );
 };
