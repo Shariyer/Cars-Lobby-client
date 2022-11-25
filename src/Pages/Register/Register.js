@@ -40,7 +40,7 @@ const Register = () => {
             // navigate("/");
             //   save user info in database here
             //   setCreatedUserEmail and will add it on save of database
-            HTMLFormElement.reset();
+            // HTMLFormElement.reset();
           })
           .catch((err) => console.log(err));
       })

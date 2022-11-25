@@ -7,6 +7,8 @@ import { authContext } from "../../../ContextProvider/ContextProvider";
 const Navbar = () => {
   const { user, LogOut } = useContext(authContext);
   const navigate = useNavigate();
+
+  // logout
   const handleLogOut = () => {
     LogOut()
       .then(() => {
@@ -24,13 +26,13 @@ const Navbar = () => {
       <li>
         <Link to="/about">About us</Link>
       </li>
-      <li>
-        <Link to="/myorders">My orders</Link>
-      </li>
+
       <li>
         <Link to="/contact">Contact</Link>
 
-        <Link to="/dashboard">Dashboard</Link>
+        <Link className="hidden lg:block" to="/dashboard">
+          Dashboard
+        </Link>
 
         {user?.uid ? (
           <>
@@ -40,6 +42,9 @@ const Navbar = () => {
             >
               Sign Out
             </button>
+            <p className="text-red-400 block lg:hidden text-clip p-2 text-center">
+              Click Right side Menubar for Dashboard
+            </p>
           </>
         ) : (
           <>

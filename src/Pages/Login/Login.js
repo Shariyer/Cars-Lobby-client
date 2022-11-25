@@ -33,7 +33,7 @@ const Login = () => {
     LoginWithEP(data.email, data.password)
       .then((result) => {
         const user = result.user;
-        console.log(user);
+        console.log("Email password user", user);
         userInfoToDb(data.name, data.email, data.userType);
         toast.success("You successfully Logged In");
       })
@@ -48,8 +48,12 @@ const Login = () => {
     GoogleLogin()
       .then((result) => {
         const user = result.user;
-        console.log("Google Logged in user :", user);
-        fetch(`http://localhost:5000/users?email=${user?.email}`)
+        // console.log("Google Logged in user :", user);
+        fetch(`http://localhost:5000/users?email=${user?.email}`, {
+          headers: {
+            authorization: `bearer ${localStorage.getItem("carsLobbyToken")}`,
+          },
+        })
           .then((res) => res.json())
           .then((data) => {
             if (data.length > 0) {
