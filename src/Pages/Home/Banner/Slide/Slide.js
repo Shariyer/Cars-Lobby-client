@@ -1,6 +1,7 @@
 /** @format */
 
 import React from "react";
+import "./slide.css";
 
 const Slide = ({ slideData }) => {
   const { id, previous, next, img } = slideData;

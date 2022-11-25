@@ -1,0 +1,11 @@
+.gradient-img:after {
+    content: '';
+    border-radius: 16px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    display: inline-block;
+    background: linear-gradient(to left, rgba(49, 72, 50, 0.388) 0%, rgba(228, 90, 59, 0.5) 100%);
+}

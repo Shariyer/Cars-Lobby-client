@@ -13,6 +13,7 @@ import AddProduct from "../Pages/Dashboard/AddProduct/AddProduct";
 import AllSellers from "../Pages/Dashboard/AllSellers/AllSellers";
 import AllBuyers from "../Pages/Dashboard/AllBuyers/AllBuyers";
 import DashboardLayout from "../Layout/DashboardLayout";
+import ProductCategories from "../Pages/Home/ProductCategories/ProductCategories";
 
 const router = createBrowserRouter([
   {
@@ -34,6 +35,10 @@ const router = createBrowserRouter([
       {
         path: "/aboutus",
         element: <AboutUs></AboutUs>,
+      },
+      {
+        path: "/productCategories",
+        element: <ProductCategories />,
       },
     ],
   },
