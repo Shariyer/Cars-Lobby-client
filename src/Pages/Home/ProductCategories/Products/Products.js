@@ -9,7 +9,7 @@ import ProductsModal from "./ProductsModal/ProductsModal";
 const Products = () => {
   const products = useLoaderData();
   const [productModalData, setProductModalData] = useState(null);
-  console.log("products are:", products);
+  //   console.log("products are:", products);
   return (
     <div className="py-10 px-10">
       <h3 className="text-center font-bold text-3xl text-white">

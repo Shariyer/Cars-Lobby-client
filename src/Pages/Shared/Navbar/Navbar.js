@@ -83,9 +83,12 @@ const Navbar = () => {
             {menuItems}
           </ul>
         </div>
-        <Link className="btn btn-ghost normal-case text-xl lg:text-2xl">
-          Cars Lobby
-        </Link>
+        <div className="flex items-center">
+          <img className="w-20 rounded-full" src="logo.png" alt="" />
+          <Link className="btn btn-ghost normal-case text-xl lg:text-2xl">
+            Cars Lobby
+          </Link>
+        </div>
       </div>
       <div className="navbar-right hidden lg:flex">
         <ul className="menu menu-horizontal p-0">{menuItems}</ul>
