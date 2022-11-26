@@ -6,8 +6,10 @@ import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { authContext } from "../../ContextProvider/ContextProvider";
 import useToken from "../../Hooks/useToken/useToken";
+import useTitle from "../../Hooks/useTitle";
 
 const Register = () => {
+  useTitle("Registration");
   const {
     register,
     handleSubmit,

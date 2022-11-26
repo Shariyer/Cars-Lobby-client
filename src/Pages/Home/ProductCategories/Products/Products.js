@@ -5,8 +5,10 @@ import { useLoaderData } from "react-router-dom";
 import { MdFavoriteBorder } from "react-icons/md";
 import { FaFontAwesomeFlag } from "react-icons/fa";
 import ProductsModal from "./ProductsModal/ProductsModal";
+import useTitle from "../../../../Hooks/useTitle";
 
 const Products = () => {
+  useTitle("Producs");
   const products = useLoaderData();
   const [productModalData, setProductModalData] = useState(null);
   //   console.log("products are:", products);

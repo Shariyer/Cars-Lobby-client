@@ -24,8 +24,8 @@ const Footer = () => {
           <Link>
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
+              width="36"
+              height="36"
               viewBox="0 0 24 24"
               className="fill-current hover:text-sky-500"
             >
@@ -35,8 +35,8 @@ const Footer = () => {
           <Link>
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
+              width="36"
+              height="36"
               viewBox="0 0 24 24"
               className="fill-current hover:text-red-700"
             >
@@ -46,8 +46,8 @@ const Footer = () => {
           <Link>
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
+              width="36"
+              height="36"
               viewBox="0 0 24 24"
               className="fill-current hover:text-blue-600"
             >

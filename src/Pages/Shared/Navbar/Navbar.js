@@ -3,6 +3,7 @@
 import React, { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { authContext } from "../../../ContextProvider/ContextProvider";
+import logo from "../../../assets/logo/logo.png";
 
 const Navbar = () => {
   const { user, LogOut } = useContext(authContext);
@@ -24,7 +25,7 @@ const Navbar = () => {
       </li>
 
       <li>
-        <Link to="/about">About us</Link>
+        <Link to="/aboutus">About us</Link>
       </li>
 
       <li>
@@ -84,7 +85,7 @@ const Navbar = () => {
           </ul>
         </div>
         <div className="flex items-center">
-          <img className="w-20 rounded-full" src="logo.png" alt="" />
+          <img className="w-20 rounded-2xl" src={logo} alt="" />
           <Link className="btn btn-ghost normal-case text-xl lg:text-2xl">
             Cars Lobby
           </Link>

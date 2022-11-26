@@ -4,9 +4,11 @@ import { useQuery } from "@tanstack/react-query";
 import React, { useContext, useState } from "react";
 import { Link, Outlet } from "react-router-dom";
 import { authContext } from "../ContextProvider/ContextProvider";
+import useTitle from "../Hooks/useTitle";
 import Navbar from "../Pages/Shared/Navbar/Navbar";
 
 const DashboardLayout = () => {
+  useTitle("Dashboard");
   const { user } = useContext(authContext);
   //   const [userType, setUserType] = useState("");
   const { data: userRole } = useQuery({

@@ -7,8 +7,10 @@ import { authContext } from "../../ContextProvider/ContextProvider";
 import { FcGoogle } from "react-icons/fc";
 import useToken from "../../Hooks/useToken/useToken";
 import toast from "react-hot-toast";
+import useTitle from "../../Hooks/useTitle";
 
 const Login = () => {
+  useTitle("Login");
   const {
     register,
     formState: { errors },
