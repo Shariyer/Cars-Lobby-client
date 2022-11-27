@@ -1,28 +1,66 @@
 /** @format */
 
-import React from "react";
+import React, { useContext } from "react";
+import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
+import { authContext } from "../../../ContextProvider/ContextProvider";
 import useTitle from "../../../Hooks/useTitle";
 // import { ImFolderUpload } from "react-icons/im";
 const AddProduct = () => {
+  const { user } = useContext(authContext);
+  const navigate = useNavigate();
   useTitle("Add Product");
-  const handleAddProduct = (event) => {
-    event.preventDefault();
-    const form = event.target;
-    const productName = form.name.value;
-    const image = form.image.value;
-    const originalPrice = form.originalPrice.value;
-    const resalePrice = form.resalePrice.value;
-    const location = form.location.value;
-    const phone = form.phone.value;
-
-    console.log(
-      productName,
-      image,
-      originalPrice,
-      resalePrice,
-      location,
-      phone
-    );
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+  const imageHostKey = process.env.REACT_APP_ImagebbKey;
+  const handleAddProduct = (data) => {
+    console.log(data, "data");
+    const image = data.image[0];
+    const formData = new FormData();
+    formData.append("image", image);
+    const url = `https://api.imgbb.com/1/upload?key=${imageHostKey}`;
+    fetch(url, {
+      method: "POST",
+      body: formData,
+    })
+      .then((res) => res.json())
+      .then((ImgbbData) => {
+        if (ImgbbData.success) {
+          console.log(ImgbbData.data.url, "inside Img BB");
+          //seller carInformation object
+          const carInfo = {
+            categoryName: data.categoryName,
+            name: data.name,
+            img: ImgbbData.data.url,
+            originalPrice: data.originalPrice,
+            resalePrice: data.resalePrice,
+            location: data.location,
+            usage: data.usage,
+            sellerName: user?.displayName,
+            sellerEmail: user?.email,
+            sellerContact: data.phone,
+            productStatus: "available",
+          };
+          fetch(`http://localhost:5000/cars?email=${user?.email}`, {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+              authorization: `bearer ${localStorage.getItem("carsLobbyToken")}`,
+            },
+            body: JSON.stringify(carInfo),
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              console.log(data);
+              toast.success(`${data.name} successfully added`);
+              navigate("/dashboard/myProducts");
+            });
+        }
+      });
   };
   return (
     <div>
@@ -30,60 +68,121 @@ const AddProduct = () => {
         <h3 className="text-center font-bold text-3xl text-green-700">
           Give Product Details
         </h3>
-        <form onSubmit={handleAddProduct} className="py-4 text-white">
+        <form
+          onSubmit={handleSubmit(handleAddProduct)}
+          className="py-4 text-white"
+        >
           <div className="rounded-2xl ">
-            <label className="label"> Name:</label>
+            <label className="label">Car Name:</label>
             <input
-              name="name"
               type="text"
+              {...register("name", {
+                required: "Name is Required",
+              })}
               placeholder="Type your Product name "
               className="input input-bordered input-accent w-full mb-2"
             />
+            {errors.name && (
+              <p className="text-red-500">{errors.name.message}</p>
+            )}
+          </div>
+          <div className="rounded-2xl ">
+            <label className="label">Car Category Name:</label>
+            <input
+              type="text"
+              {...register("categoryName", {
+                required: "categoryName is Required",
+              })}
+              placeholder="Type your category  name "
+              className="input input-bordered input-accent w-full mb-2"
+            />
+            {errors.categoryName && (
+              <p className="text-red-500">{errors.categoryName.message}</p>
+            )}
           </div>
           <div className="rounded-2xl ">
             <label className="label"> Image:</label>
             <input
-              name="image"
               type="file"
+              {...register("image", {
+                required: "image is Required",
+              })}
               placeholder="Upload your image "
               className="border py-2 px-2 input-accent bg-base-100  rounded w-full mb-2"
             />
+            {errors.image && (
+              <p className="text-red-500">{errors.image.message}</p>
+            )}
           </div>
           <div className="rounded-2xl">
             <label className="label"> Original Price:</label>
             <input
-              name="originalPrice"
               type="number"
+              {...register("originalPrice", {
+                required: "original Price is Required",
+              })}
               placeholder="Type your price here"
               className="input input-bordered input-accent w-full mb-2"
             />
+            {errors.originalPrice && (
+              <p className="text-red-500">{errors.originalPrice.message}</p>
+            )}
           </div>
           <div className="rounded-2xl">
             <label className="label"> Resale Price:</label>
             <input
-              name="resalePrice"
               type="number"
+              {...register("resalePrice", {
+                required: "resale Price is Required",
+              })}
               placeholder="Type your price here"
               className="input input-bordered input-accent w-full mb-2"
             />
+            {errors.resalePrice && (
+              <p className="text-red-500">{errors.resalePrice.message}</p>
+            )}
+          </div>
+          <div className="rounded-2xl">
+            <label className="label"> Used for :</label>
+            <input
+              type="text"
+              {...register("usage", {
+                required: "product usage is Required",
+              })}
+              placeholder="Type your usage here"
+              className="input input-bordered input-accent w-full mb-2"
+            />
+            {errors.usage && (
+              <p className="text-red-500">{errors.usage.message}</p>
+            )}
           </div>
           <div className="rounded-2xl">
             <label className="label">Primary Meeting Location:</label>
             <input
-              name="location"
               type="text"
+              {...register("location", {
+                required: "location is Required",
+              })}
               placeholder="Type your location here"
               className="input input-bordered input-accent w-full mb-2"
             />
+            {errors.location && (
+              <p className="text-red-500">{errors.location.message}</p>
+            )}
           </div>
           <div className="rounded-2xl">
             <label className="label">Contact Number:</label>
             <input
-              name="phone"
               type="number"
+              {...register("phone", {
+                required: "phone is Required",
+              })}
               placeholder="Type your contact number"
               className="input input-bordered input-accent w-full mb-2"
             />
+            {errors.phone && (
+              <p className="text-red-500">{errors.phone.message}</p>
+            )}
           </div>
 
           <input
