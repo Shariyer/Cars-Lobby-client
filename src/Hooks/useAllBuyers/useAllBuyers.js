@@ -1,27 +1,31 @@
 /** @format */
 
-import { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 
 const useAllBuyers = (email) => {
-  const [allBuyers, setAllBuyers] = useState([]);
-  const [isAllSellerLoading, setAllBuyersLoading] = useState(true);
+  const {
+    data: allBuyers,
+    isLoading,
+    refetch,
+  } = useQuery({
+    queryKey: ["allBuyers"],
+    queryFn: async () => {
+      try {
+        const res = await fetch(
+          `http://localhost:5000/users/allBuyers?email=${email}`,
+          {
+            headers: {
+              authorization: `bearer ${localStorage.getItem("carsLobbyToken")}`,
+            },
+          }
+        );
+        const data = await res.json();
+        return data;
+      } catch (error) {}
+    },
+  });
 
-  useEffect(() => {
-    if (email) {
-      fetch(`http://localhost:5000/users/allBuyers?email=${email}`, {
-        headers: {
-          authorization: `bearer ${localStorage.getItem("carsLobbyToken")}`,
-        },
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          // console.log(data);
-          setAllBuyers(data);
-          setAllBuyersLoading(false);
-        });
-    }
-  }, [email]);
-  return [allBuyers, isAllSellerLoading];
+  return [allBuyers, isLoading, refetch];
 };
 
 export default useAllBuyers;

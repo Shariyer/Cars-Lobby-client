@@ -18,7 +18,7 @@ const AddProduct = () => {
   } = useForm();
   const imageHostKey = process.env.REACT_APP_ImagebbKey;
   const handleAddProduct = (data) => {
-    console.log(data, "data");
+    // console.log(data, "data");
     const image = data.image[0];
     const formData = new FormData();
     formData.append("image", image);
@@ -56,11 +56,15 @@ const AddProduct = () => {
             .then((res) => res.json())
             .then((data) => {
               console.log(data);
-              toast.success(`${data.name} successfully added`);
-              navigate("/dashboard/myProducts");
-            });
+              if (data.acknowledged) {
+                toast.success(`${data.name} successfully added`);
+                navigate("/dashboard/myProducts");
+              }
+            })
+            .catch((err) => console.log(err));
         }
-      });
+      })
+      .catch((err) => console.log(err));
   };
   return (
     <div>

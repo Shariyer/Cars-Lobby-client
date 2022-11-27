@@ -1,6 +1,7 @@
 /** @format */
 
 import React, { useContext } from "react";
+import toast from "react-hot-toast";
 import { authContext } from "../../../ContextProvider/ContextProvider";
 import useMyProducts from "../../../Hooks/useMyProducts/useMyProducts";
 import useTitle from "../../../Hooks/useTitle";
@@ -9,10 +10,29 @@ import Loading from "../../Loading/Loading";
 const MyProducts = () => {
   useTitle("My Products");
   const { user } = useContext(authContext);
-  const [myProducts, isMyProductsLoading] = useMyProducts(user?.email);
-  if (isMyProductsLoading) {
+  const [myProducts, isLoading, refetch] = useMyProducts(user?.email);
+  if (isLoading) {
     return <Loading></Loading>;
   }
+  const handleDeleteProduct = (id) => {
+    const agree = window.confirm("Sure? Want to delete");
+    if (agree) {
+      fetch(`http://localhost:5000/cars/${id}?email=${user?.email}`, {
+        method: "DELETE",
+        headers: {
+          authorization: `bearer ${localStorage.getItem("carsLobbyToken")}`,
+        },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data, "data of deleting");
+          if (data.deletedCount > 0) {
+            refetch();
+            toast.success("successfully deleted");
+          }
+        });
+    }
+  };
   // console.log(myProducts, "myProducts");
   return (
     <div>
@@ -42,7 +62,10 @@ const MyProducts = () => {
                 <td>{myProduct?.name}</td>
                 <td>{myProduct?.resalePrice}$</td>
                 <td className="flex justify-center items-center">
-                  <button className="btn btn-ghost bg-red-600 text-white mr-1">
+                  <button
+                    onClick={() => handleDeleteProduct(myProduct._id)}
+                    className="btn btn-ghost bg-red-600 text-white mr-1"
+                  >
                     Delete
                   </button>
                   <button className="btn btn-ghost bg-yellow-600 text-white">

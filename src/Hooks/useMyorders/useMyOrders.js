@@ -1,26 +1,31 @@
 /** @format */
 
-import { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 
 const useMyOrders = (email) => {
-  const [myOrders, setMyOrders] = useState([]);
-  const [isOrdersLoading, setOrdersLoading] = useState(true);
+  const {
+    data: myOrders,
+    isLoading,
+    refetch,
+  } = useQuery({
+    queryKey: ["myOrders"],
+    queryFn: async () => {
+      try {
+        const res = await fetch(
+          `http://localhost:5000/bookings?email=${email}`,
+          {
+            headers: {
+              authorization: `bearer ${localStorage.getItem("carsLobbyToken")}`,
+            },
+          }
+        );
+        const data = await res.json();
+        return data;
+      } catch (error) {}
+    },
+  });
 
-  useEffect(() => {
-    if (email) {
-      fetch(`http://localhost:5000/bookings?email=${email}`, {
-        headers: {
-          authorization: `bearer ${localStorage.getItem("carsLobbyToken")}`,
-        },
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          setMyOrders(data);
-          setOrdersLoading(false);
-        });
-    }
-  }, [email]);
-  return [myOrders, isOrdersLoading];
+  return [myOrders, isLoading, refetch];
 };
 
 export default useMyOrders;
