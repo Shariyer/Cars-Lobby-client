@@ -49,31 +49,39 @@ const MyProducts = () => {
               <th>Purchase Price</th>
               <th className="text-center">Action</th>
             </tr>
-            {myProducts.map((myProduct, i) => (
-              <tr key={i}>
-                <th>{1 + i}</th>
-                <td>
-                  <img
-                    src={myProduct?.img}
-                    className="w-10 rounded-full"
-                    alt=""
-                  />
-                </td>
-                <td>{myProduct?.name}</td>
-                <td>{myProduct?.resalePrice}$</td>
-                <td className="flex justify-center items-center">
-                  <button
-                    onClick={() => handleDeleteProduct(myProduct._id)}
-                    className="btn btn-ghost bg-red-600 text-white mr-1"
-                  >
-                    Delete
-                  </button>
-                  <button className="btn btn-ghost bg-yellow-600 text-white">
-                    Advertise
-                  </button>
-                </td>
-              </tr>
-            ))}
+            {myProducts.length === 0 ? (
+              <h3 className="text-center text-red-700 font-bold text-3xl">
+                You Have no Product yet
+              </h3>
+            ) : (
+              <>
+                {myProducts.map((myProduct, i) => (
+                  <tr key={i}>
+                    <th>{1 + i}</th>
+                    <td>
+                      <img
+                        src={myProduct?.img}
+                        className="w-10 rounded-full"
+                        alt=""
+                      />
+                    </td>
+                    <td>{myProduct?.name}</td>
+                    <td>{myProduct?.resalePrice}$</td>
+                    <td className="flex justify-center items-center">
+                      <button
+                        onClick={() => handleDeleteProduct(myProduct._id)}
+                        className="btn btn-ghost bg-red-600 text-white mr-1"
+                      >
+                        Delete
+                      </button>
+                      <button className="btn btn-ghost bg-yellow-600 text-white">
+                        Advertise
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </>
+            )}
           </thead>
           <tbody></tbody>
         </table>

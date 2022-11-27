@@ -52,27 +52,41 @@ const MyOrders = () => {
               <th>Delete</th>
               <th className="text-center">Payment</th>
             </tr>
-            {myOrders.map((order, i) => (
-              <tr key={i}>
-                <th>{1 + i}</th>
-                <td>{/* <img src="" alt="" /> */}</td>
-                <td>{order?.productName}</td>
-                <td>{order?.productPrice}$</td>
-                <td>
-                  <button
-                    className="btn btn-ghost bg-red-600"
-                    onClick={() => handleDeleteOrder(order._id)}
-                  >
-                    Delete
-                  </button>
-                </td>
-                <td className="flex justify-center items-center">
-                  <button className="btn btn-ghost bg-red-600 text-white px-3 py-1">
-                    Pay
-                  </button>
-                </td>
-              </tr>
-            ))}
+            {myOrders.length === 0 ? (
+              <h3 className="text-center text-red-700 font-bold text-3xl">
+                You have no orders Yet!!
+              </h3>
+            ) : (
+              <>
+                {myOrders.map((order, i) => (
+                  <tr key={i}>
+                    <th>{1 + i}</th>
+                    <td>
+                      <img
+                        src={order.productImage}
+                        className="w-10 rounded-full"
+                        alt=""
+                      />
+                    </td>
+                    <td>{order?.productName}</td>
+                    <td>{order?.productPrice}$</td>
+                    <td>
+                      <button
+                        className="btn btn-ghost bg-red-600"
+                        onClick={() => handleDeleteOrder(order._id)}
+                      >
+                        Delete
+                      </button>
+                    </td>
+                    <td className="flex justify-center items-center">
+                      <button className="btn btn-ghost bg-red-600 text-white px-3 py-1">
+                        Pay
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </>
+            )}
           </thead>
           <tbody></tbody>
         </table>

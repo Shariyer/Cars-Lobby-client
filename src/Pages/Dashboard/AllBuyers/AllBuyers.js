@@ -47,29 +47,39 @@ const AllBuyers = () => {
           <thead>
             <tr>
               <th>No.</th>
-              <th> Seller Name</th>
-              <th>Seller Email</th>
+              <th> Buyers Name</th>
+              <th>Buyers Email</th>
               <th className="text-center">Action</th>
             </tr>
           </thead>
           <tbody>
-            {allBuyers.map((buyer, i) => (
-              <tr key={i}>
-                <th>{1 + i}</th>
-                <td>{buyer?.name}</td>
-                <td className="normal-case">{buyer?.email}</td>
-                <td className="flex justify-center items-center text-white">
-                  <button
-                    onClick={() => handleDeleteBuyer(buyer._id)}
-                    className="btn btn-ghost bg-red-600 mr-1  "
-                  >
-                    Delete
-                  </button>
+            {allBuyers.length === 0 ? (
+              <h3 className="text-center text-red-700 font-bold text-3xl">
+                No Buyer Available
+              </h3>
+            ) : (
+              <>
+                {allBuyers.map((buyer, i) => (
+                  <tr key={i}>
+                    <th>{1 + i}</th>
+                    <td>{buyer?.name}</td>
+                    <td className="normal-case">{buyer?.email}</td>
+                    <td className="flex justify-center items-center text-white">
+                      <button
+                        onClick={() => handleDeleteBuyer(buyer._id)}
+                        className="btn btn-ghost bg-red-600 mr-1  "
+                      >
+                        Delete
+                      </button>
 
-                  <button className="btn btn-ghost bg-green-600  ">Ban</button>
-                </td>
-              </tr>
-            ))}
+                      <button className="btn btn-ghost bg-green-600  ">
+                        Ban
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </>
+            )}
           </tbody>
         </table>
       }

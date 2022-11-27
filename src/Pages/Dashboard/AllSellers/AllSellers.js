@@ -52,26 +52,34 @@ const AllSellers = () => {
             </tr>
           </thead>
           <tbody>
-            {allSellers.map((seller, i) => (
-              <tr key={i}>
-                <th>{1 + i}</th>
-                <td>{seller?.name}</td>
-                <td className="normal-case">{seller?.email}</td>
-                <td>
-                  <button
-                    onClick={() => handleDeleteSeller(seller._id)}
-                    className="btn btn-ghost bg-red-600  "
-                  >
-                    Delete
-                  </button>
-                </td>
-                <td className="flex justify-center items-center">
-                  <button className="btn btn-ghost bg-green-600  ">
-                    verify
-                  </button>
-                </td>
-              </tr>
-            ))}
+            {allSellers.length === 0 ? (
+              <h3 className="text-center text-red-700 font-bold text-3xl">
+                No seller Available
+              </h3>
+            ) : (
+              <>
+                {allSellers.map((seller, i) => (
+                  <tr key={i}>
+                    <th>{1 + i}</th>
+                    <td>{seller?.name}</td>
+                    <td className="normal-case">{seller?.email}</td>
+                    <td>
+                      <button
+                        onClick={() => handleDeleteSeller(seller._id)}
+                        className="btn btn-ghost bg-red-600  "
+                      >
+                        Delete
+                      </button>
+                    </td>
+                    <td className="flex justify-center items-center">
+                      <button className="btn btn-ghost bg-green-600  ">
+                        verify
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </>
+            )}
           </tbody>
         </table>
       }

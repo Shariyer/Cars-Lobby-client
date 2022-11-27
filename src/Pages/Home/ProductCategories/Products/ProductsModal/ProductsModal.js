@@ -8,7 +8,7 @@ import Loading from "../../../../Loading/Loading";
 const ProductsModal = ({ productModalData, setProductModalData }) => {
   const { user, loading } = useContext(authContext);
   //   console.log("productModalData", productModalData);
-  const { name, resalePrice, _id } = productModalData;
+  const { name, resalePrice, _id, img } = productModalData;
   if (loading) {
     return <Loading></Loading>;
   }
@@ -24,6 +24,7 @@ const ProductsModal = ({ productModalData, setProductModalData }) => {
     const carBooking = {
       product_id: _id,
       productName: name,
+      productImage: img,
       customerName: customerName,
       productPrice: resalePrice,
       customerEmail: email,
