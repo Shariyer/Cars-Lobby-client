@@ -11,7 +11,7 @@ const AllSellers = () => {
   if (isAllSellerLoading) {
     return <Loading></Loading>;
   }
-  console.log(allSellers, "all sellers ");
+  // console.log(allSellers, "all sellers ");
   return (
     <div>
       <h1 className="text-center font-bold text-green-800 my-8 text-3xl">
