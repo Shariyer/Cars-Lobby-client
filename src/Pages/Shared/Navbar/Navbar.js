@@ -31,7 +31,7 @@ const Navbar = () => {
       <li>
         <Link to="/contact">Contact</Link>
 
-        <Link className="hidden lg:block" to="/dashboard">
+        <Link className="lg:block hidden" to="/dashboard">
           Dashboard
         </Link>
 

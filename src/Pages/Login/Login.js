@@ -36,7 +36,8 @@ const Login = () => {
       .then((result) => {
         const user = result.user;
         console.log("Email password user", user);
-        userInfoToDb(data.name, data.email, data.userType);
+        setLoggedinUserEmail(data.email);
+        // userInfoToDb(data.name, data.email, data.userType);
         toast.success("You successfully Logged In");
       })
       .catch((error) => {
@@ -58,15 +59,19 @@ const Login = () => {
         })
           .then((res) => res.json())
           .then((data) => {
-            if (data.length > 0) {
+            console.log("data", data);
+            if (data.length === 1) {
               console.log("user found");
               setLoggedinUserEmail(user?.email);
+            } else if (data.length > 1) {
+              console.log(" Many users found ");
+              // userInfoToDb(user?.displayName, user?.email, "buyer");
             } else {
               console.log("user not found");
-              userInfoToDb(user?.displayName, user?.email, "buyer");
             }
           })
           .catch((err) => console.log(err));
+        userInfoToDb(user?.displayName, user?.email, "buyer");
         toast.success("You successfully Logged In");
       })
       .catch((err) => console.log(err));

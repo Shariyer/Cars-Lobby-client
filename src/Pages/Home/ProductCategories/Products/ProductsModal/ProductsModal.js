@@ -8,7 +8,7 @@ import Loading from "../../../../Loading/Loading";
 const ProductsModal = ({ productModalData, setProductModalData }) => {
   const { user, loading } = useContext(authContext);
   //   console.log("productModalData", productModalData);
-  const { name, resalePrice } = productModalData;
+  const { name, resalePrice, _id } = productModalData;
   if (loading) {
     return <Loading></Loading>;
   }
@@ -22,6 +22,7 @@ const ProductsModal = ({ productModalData, setProductModalData }) => {
     const customerMeetingLocation = form.customerMeetingLocation.value;
 
     const carBooking = {
+      product_id: _id,
       productName: name,
       customerName: customerName,
       productPrice: resalePrice,
