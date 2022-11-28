@@ -1,6 +1,6 @@
 /** @format */
 
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import toast from "react-hot-toast";
 import { authContext } from "../../../ContextProvider/ContextProvider";
 import useAllSellers from "../../../Hooks/useAllSellers/useAllSellers";
@@ -8,6 +8,7 @@ import Loading from "../../Loading/Loading";
 
 const AllSellers = () => {
   const { user } = useContext(authContext);
+  const [verify, setVerify] = useState(true);
   const [allSellers, isLoading, refetch] = useAllSellers(user?.email);
   if (isLoading) {
     return <Loading></Loading>;
@@ -34,6 +35,23 @@ const AllSellers = () => {
           }
         });
     }
+  };
+  // handle verify sellers
+  const handleVerify = (id) => {
+    fetch(`http://localhost:5000/users/allSellers/${id}?email=${user?.email}`, {
+      method: "PUT",
+      headers: {
+        authorization: `bearer ${localStorage.getItem("carsLobbyToken")}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data, "verify seller");
+        if (data.modifiedCount > 0) {
+          setVerify(false);
+        }
+      })
+      .catch((err) => console.log(err));
   };
   return (
     <div>
@@ -72,9 +90,14 @@ const AllSellers = () => {
                       </button>
                     </td>
                     <td className="flex justify-center items-center">
-                      <button className="btn btn-ghost bg-green-600  ">
-                        verify
-                      </button>
+                      {verify && (
+                        <button
+                          onClick={() => handleVerify(seller._id)}
+                          className="btn btn-ghost bg-green-600  "
+                        >
+                          verify
+                        </button>
+                      )}
                     </td>
                   </tr>
                 ))}
