@@ -34,6 +34,43 @@ const MyProducts = () => {
     }
   };
   // console.log(myProducts, "myProducts");
+  // advertisement
+  const handleAdvertise = (myProduct) => {
+    fetch(
+      `http://localhost:5000/advertise/${myProduct._id}?email=${user?.email}`,
+      {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+          authorization: `bearer ${localStorage.getItem("carsLobbyToken")}`,
+        },
+        body: JSON.stringify(myProduct),
+      }
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.acknowledged) {
+          toast.success("Congratulation!! Your Product is Advertising now");
+        }
+      });
+  };
+  // stop advertisement
+  const handleStopAdvertise = (id) => {
+    fetch(`http://localhost:5000/advertise/${id}?email=${user?.email}`, {
+      method: "DELETE",
+      headers: {
+        authorization: `bearer ${localStorage.getItem("carsLobbyToken")}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data, "data of deleting");
+        if (data.deletedCount > 0) {
+          refetch();
+          toast.success(`successfully stop Advertising`);
+        }
+      });
+  };
   return (
     <div>
       <h1 className="text-center text-3xl font-bold my-8 text-green-600">
@@ -74,8 +111,17 @@ const MyProducts = () => {
                       >
                         Delete
                       </button>
-                      <button className="btn btn-ghost bg-yellow-600 text-white">
+                      <button
+                        onClick={() => handleAdvertise(myProduct)}
+                        className="btn btn-ghost bg-yellow-600 text-white mr-1"
+                      >
                         Advertise
+                      </button>
+                      <button
+                        onClick={() => handleStopAdvertise(myProduct._id)}
+                        className="btn btn-ghost bg-red-600 text-white"
+                      >
+                        Stop Advertise
                       </button>
                     </td>
                   </tr>

@@ -4,10 +4,10 @@ import React, { useContext, useState } from "react";
 import { useLoaderData } from "react-router-dom";
 import { MdFavoriteBorder } from "react-icons/md";
 import { FaFontAwesomeFlag } from "react-icons/fa";
+import { MdVerified } from "react-icons/md";
 import ProductsModal from "./ProductsModal/ProductsModal";
 import useTitle from "../../../../Hooks/useTitle";
 import { authContext } from "../../../../ContextProvider/ContextProvider";
-import { MdVerified } from "react-icons/md";
 import toast from "react-hot-toast";
 
 const Products = () => {

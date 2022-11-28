@@ -19,7 +19,7 @@ const ProductCategories = () => {
   });
   //   console.log("Product categories:", categories);
   return (
-    <div className="mt-10 py-10">
+    <div className="mt-10 py-10 ">
       <h3 className="text-center text-3xl font-extrabold text-white">
         Cars Lobby's Available Categories:
       </h3>
@@ -27,7 +27,9 @@ const ProductCategories = () => {
         {categories.map((category) => (
           <div key={category._id} className="card w-96  shadow-xl mx-auto">
             <div className="card-body">
-              <p className="text-center">Choose Category</p>
+              <p className="text-center font-bold text-xl text-yellow-400">
+                Choose Category
+              </p>
               <h2 className="text-center font-bold text-2xl text-white">
                 Car Category: {category.categoryName}
               </h2>

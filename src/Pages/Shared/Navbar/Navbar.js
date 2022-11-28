@@ -29,7 +29,7 @@ const Navbar = () => {
       </li>
 
       <li>
-        <Link to="/contact">Contact</Link>
+        <Link to="/blog">Blog</Link>
 
         <Link className="lg:block hidden" to="/dashboard">
           Dashboard

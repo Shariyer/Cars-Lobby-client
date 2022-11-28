@@ -1,17 +1,18 @@
 /** @format */
 
 import { useQuery } from "@tanstack/react-query";
-const useReports = (email) => {
+
+const useAdvertisements = (email) => {
   const {
-    data: reports,
+    data: advertisements,
     isLoading,
     refetch,
   } = useQuery({
-    queryKey: ["reports"],
-    queryFn: async (email) => {
+    queryKey: ["advertisements"],
+    queryFn: async () => {
       try {
         const res = await fetch(
-          `http://localhost:5000/reports?email=${email}`,
+          `http://localhost:5000/advertise?email=${email}`,
           {
             headers: {
               authorization: `bearer ${localStorage.getItem("carsLobbyToken")}`,
@@ -24,7 +25,7 @@ const useReports = (email) => {
     },
   });
 
-  return [reports, isLoading, refetch];
+  return [advertisements, isLoading, refetch];
 };
 
-export default useReports;
+export default useAdvertisements;
