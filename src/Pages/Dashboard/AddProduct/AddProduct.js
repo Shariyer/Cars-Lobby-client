@@ -6,9 +6,11 @@ import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { authContext } from "../../../ContextProvider/ContextProvider";
 import useTitle from "../../../Hooks/useTitle";
+import useVerifySeller from "../../../Hooks/useVerifySeller/useVerifySeller";
 // import { ImFolderUpload } from "react-icons/im";
 const AddProduct = () => {
   const { user } = useContext(authContext);
+  const [verification] = useVerifySeller(user?.email);
   const navigate = useNavigate();
   useTitle("Add Product");
   const {
@@ -32,6 +34,12 @@ const AddProduct = () => {
         if (ImgbbData.success) {
           console.log(ImgbbData.data.url, "inside Img BB");
           //seller carInformation object
+          let sellerStatus = "";
+          if (verification) {
+            sellerStatus = "verified";
+          } else {
+            sellerStatus = "not verified";
+          }
           const carInfo = {
             categoryName: data.categoryName,
             name: data.name,
@@ -43,6 +51,7 @@ const AddProduct = () => {
             sellerName: user?.displayName,
             sellerEmail: user?.email,
             sellerContact: data.phone,
+            sellerStatus: sellerStatus,
             productStatus: "available",
           };
           fetch(`http://localhost:5000/cars?email=${user?.email}`, {

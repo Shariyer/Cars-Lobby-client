@@ -1,17 +1,39 @@
 /** @format */
 
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useLoaderData } from "react-router-dom";
 import { MdFavoriteBorder } from "react-icons/md";
 import { FaFontAwesomeFlag } from "react-icons/fa";
 import ProductsModal from "./ProductsModal/ProductsModal";
 import useTitle from "../../../../Hooks/useTitle";
+import { authContext } from "../../../../ContextProvider/ContextProvider";
+import { MdVerified } from "react-icons/md";
+import toast from "react-hot-toast";
 
 const Products = () => {
   useTitle("Producs");
   const products = useLoaderData();
   const [productModalData, setProductModalData] = useState(null);
+  const { user } = useContext(authContext);
   //   console.log("products are:", products);
+
+  const handleReport = (product) => {
+    fetch(`http://localhost:5000/reports/${product._id}?email=${user?.email}`, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+        authorization: `bearer ${localStorage.getItem("carsLobbyToken")}`,
+      },
+      body: JSON.stringify(product),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.acknowledged) {
+          toast.success("You have Reported This item successfully");
+        }
+      })
+      .catch((err) => console.log(err));
+  };
   return (
     <div className="py-10 px-10">
       <h3 className="text-center font-bold text-3xl text-white">
@@ -36,7 +58,10 @@ const Products = () => {
                     <MdFavoriteBorder />
                   </p>
                 </h4>
-                <h4 className="flex items-center hover:text-black hover:cursor-pointer">
+                <h4
+                  onClick={() => handleReport(product)}
+                  className="flex items-center hover:text-black hover:cursor-pointer"
+                >
                   Report{" "}
                   <p className="ml-2">
                     <FaFontAwesomeFlag />
@@ -52,7 +77,14 @@ const Products = () => {
               </p>
               <p>Meeting Location : {product?.location}</p>
               <p>Used : {product?.usage}</p>
-              <p>Seller : {product?.sellerName}</p>
+              <div className="flex justify-between items-center">
+                {product.sellerStatus === "verified" && (
+                  <p className="text-blue-600">
+                    <MdVerified />
+                  </p>
+                )}
+                <p className="ml-2">Seller : {product?.sellerName}</p>
+              </div>
               <div className="card-actions">
                 <label
                   onClick={() => setProductModalData(product)}
