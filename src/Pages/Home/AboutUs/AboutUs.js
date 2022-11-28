@@ -12,7 +12,7 @@ const AboutUs = () => {
       <div className="hero-content flex-col lg:flex-row-reverse">
         <img src={pic} className="w-60 rounded-lg shadow-2xl" alt="" />
         <div className="text-white">
-          <h1 className="text-5xl font-bold text-center">About Us</h1>
+          <h1 className="text-3xl font-bold text-center">About Us</h1>
           <p className=" py-6 w-10/12 mx-auto">
             Cars Lobby gives you 1 hundred percent authentic product and
             verified product you can trust blindly. And what remains is to check
@@ -23,8 +23,8 @@ const AboutUs = () => {
             <Link className="p-10 bg-white lg:mr-2 mr-0 rounded-full hover:bg-black hover:cursor-pointer">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                width="60"
-                height="60"
+                width="30"
+                height="30"
                 viewBox="0 0 24 24"
                 className="fill-current text-sky-500"
               >
@@ -34,8 +34,8 @@ const AboutUs = () => {
             <Link className="p-10 bg-white lg:mr-2 mr-0 rounded-full hover:bg-black hover:cursor-pointer">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                width="60"
-                height="60"
+                width="30"
+                height="30"
                 viewBox="0 0 24 24"
                 className="fill-current text-red-700"
               >
@@ -45,8 +45,8 @@ const AboutUs = () => {
             <Link className="p-10 bg-white lg:mr-2 mr-0 rounded-full hover:bg-black hover:cursor-pointer">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                width="60"
-                height="60"
+                width="30"
+                height="30"
                 viewBox="0 0 24 24"
                 className="fill-current text-blue-600"
               >
