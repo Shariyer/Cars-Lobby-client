@@ -14,6 +14,8 @@ const Footer = () => {
           Providing reliable service since 2018
         </p>
         <p>Location:Mohammadpur , Nurjahan Road R/S:39</p>
+        <p>Email:carsLobby@gmail.com</p>
+        <p>Phone:+08802485854</p>
         <p>Copyright © 2022 - All right reserved</p>
       </div>
       <div>

@@ -4,8 +4,6 @@ import React, { useContext } from "react";
 import { authContext } from "../../../ContextProvider/ContextProvider";
 import useAdvertisements from "../../../Hooks/useAdvertisements/useAdvertisements";
 import Loading from "../../Loading/Loading";
-import { MdFavoriteBorder } from "react-icons/md";
-import { FaFontAwesomeFlag } from "react-icons/fa";
 import { MdVerified } from "react-icons/md";
 
 const AdvertiseMent = () => {

@@ -16,6 +16,10 @@ import DashboardLayout from "../Layout/DashboardLayout";
 import Products from "../Pages/Home/ProductCategories/Products/Products";
 import ReportedProducts from "../Pages/Dashboard/ReportedProducts/ReportedProducts";
 import Blog from "../Pages/Blog/Blog";
+import Error from "../Pages/Error/Error";
+import AdminRoute from "./AdminRoute/AdminRoute";
+import BuyerRoute from "./BuyerRoute/BuyerRoute";
+import SellerRoute from "./SellerRoute/SellerRoute";
 // import AdminRoute from "./AdminRoute/AdminRoute";
 
 const router = createBrowserRouter([
@@ -26,22 +30,27 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home></Home>,
+        errorElement: <Error></Error>,
       },
       {
         path: "/register",
         element: <Register></Register>,
+        errorElement: <Error></Error>,
       },
       {
         path: "/login",
         element: <Login></Login>,
+        errorElement: <Error></Error>,
       },
       {
         path: "/aboutus",
         element: <AboutUs></AboutUs>,
+        errorElement: <Error></Error>,
       },
       {
         path: "/blog",
         element: <Blog></Blog>,
+        errorElement: <Error></Error>,
       },
       {
         path: "/category/:category",
@@ -52,6 +61,7 @@ const router = createBrowserRouter([
             <Products />
           </PrivateRouter>
         ),
+        errorElement: <Error></Error>,
       },
     ],
   },
@@ -65,27 +75,57 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/dashboard/myOrders",
-        element: <MyOrders />,
+        element: (
+          <BuyerRoute>
+            <MyOrders />
+          </BuyerRoute>
+        ),
+        errorElement: <Error></Error>,
       },
       {
         path: "/dashboard/myProducts",
-        element: <MyProducts></MyProducts>,
+        element: (
+          <SellerRoute>
+            <MyProducts></MyProducts>
+          </SellerRoute>
+        ),
+        errorElement: <Error></Error>,
       },
       {
         path: "/dashboard/addProduct",
-        element: <AddProduct></AddProduct>,
+        element: (
+          <SellerRoute>
+            <AddProduct></AddProduct>
+          </SellerRoute>
+        ),
+        errorElement: <Error></Error>,
       },
       {
         path: "/dashboard/allSellers",
-        element: <AllSellers></AllSellers>,
+        element: (
+          <AdminRoute>
+            <AllSellers></AllSellers>
+          </AdminRoute>
+        ),
+        errorElement: <Error></Error>,
       },
       {
         path: "/dashboard/allBuyers",
-        element: <AllBuyers></AllBuyers>,
+        element: (
+          <AdminRoute>
+            <AllBuyers></AllBuyers>
+          </AdminRoute>
+        ),
+        errorElement: <Error></Error>,
       },
       {
         path: "/dashboard/reportedProducts",
-        element: <ReportedProducts></ReportedProducts>,
+        element: (
+          <AdminRoute>
+            <ReportedProducts></ReportedProducts>
+          </AdminRoute>
+        ),
+        errorElement: <Error></Error>,
       },
     ],
   },
