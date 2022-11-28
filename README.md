@@ -10,7 +10,7 @@ server-site-Hosting-link:
 Admin User id: s.m.shariyer04@gmail.com
 Admin password:123456
 
-### Projects spcial features:
+### Projects special features:
 1.Firebase Authentication System
 2.Login with Google.
 3.Email and Password based Login
@@ -20,5 +20,5 @@ Admin password:123456
 7.redirect to current page after login
 8.admin can see  allbuyers and allsellers , delete them as well as verify sellers 
 9.buyer and see booked product
-10.seller can advertise product and cancel advertisement and also see their all products
+10.seller can advertise product and cancel advertisement, add product and also see their all products
 11. buyer can report any product and admin can take action based on report
