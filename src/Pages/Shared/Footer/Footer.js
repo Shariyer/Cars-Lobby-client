@@ -2,21 +2,18 @@
 
 import React from "react";
 import { Link } from "react-router-dom";
+import logo from "../../../assets/logo/logo.png";
 
 const Footer = () => {
   return (
     <footer className="footer footer-center p-10 bg-base-100 shadow-2xl text-primary-content">
       <div>
-        <img
-          className="rounded-3xl shadow-2xl"
-          src="logo.png
-        "
-          alt=""
-        />
+        <img className="rounded-3xl shadow-2xl" src={logo} alt="" />
         <p className="font-bold">
           Cars Lobby <br />
           Providing reliable service since 2018
         </p>
+        <p>Location:Mohammadpur , Nurjahan Road R/S:39</p>
         <p>Copyright © 2022 - All right reserved</p>
       </div>
       <div>

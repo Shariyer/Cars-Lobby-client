@@ -13,6 +13,11 @@ const AddProduct = () => {
   const [verification] = useVerifySeller(user?.email);
   const navigate = useNavigate();
   useTitle("Add Product");
+  // time
+  const date = new Date();
+  const time =
+    date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+
   const {
     register,
     handleSubmit,
@@ -43,6 +48,8 @@ const AddProduct = () => {
           const carInfo = {
             categoryName: data.categoryName,
             name: data.name,
+            purchase: data.purchaseYear,
+            condition: data.condition,
             img: ImgbbData.data.url,
             originalPrice: data.originalPrice,
             resalePrice: data.resalePrice,
@@ -53,6 +60,7 @@ const AddProduct = () => {
             sellerContact: data.phone,
             sellerStatus: sellerStatus,
             productStatus: "available",
+            timeOfPosting: time,
           };
           fetch(`http://localhost:5000/cars?email=${user?.email}`, {
             method: "POST",
@@ -111,6 +119,34 @@ const AddProduct = () => {
             />
             {errors.categoryName && (
               <p className="text-red-500">{errors.categoryName.message}</p>
+            )}
+          </div>
+          <div className="rounded-2xl ">
+            <label className="label">Car Purchased Year:</label>
+            <input
+              type="text"
+              {...register("purchaseYear", {
+                required: "purchase Year is Required",
+              })}
+              placeholder="Type your category  name "
+              className="input input-bordered input-accent w-full mb-2"
+            />
+            {errors.categoryName && (
+              <p className="text-red-500">{errors.categoryName.message}</p>
+            )}
+          </div>
+          <div className="rounded-2xl ">
+            <label className="label">Car Condition:</label>
+            <input
+              type="text"
+              {...register("condition", {
+                required: "car condition is Required",
+              })}
+              placeholder="Type your category  name "
+              className="input input-bordered input-accent w-full mb-2"
+            />
+            {errors.condition && (
+              <p className="text-red-500">{errors.condition.message}</p>
             )}
           </div>
           <div className="rounded-2xl ">

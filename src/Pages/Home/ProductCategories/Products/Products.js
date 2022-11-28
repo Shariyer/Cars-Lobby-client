@@ -58,6 +58,7 @@ const Products = () => {
                     <MdFavoriteBorder />
                   </p>
                 </h4>
+                <p>Posted at:{product?.timeOfPosting}</p>
                 <h4
                   onClick={() => handleReport(product)}
                   className="flex items-center hover:text-black hover:cursor-pointer"
@@ -75,6 +76,13 @@ const Products = () => {
               <p className="text-green-600 font-bold">
                 Resale Price : {product?.resalePrice}$ Only
               </p>
+              <p className="text-green-600 font-bold">
+                Purchase Year : {product?.purchase} year
+              </p>
+              <p className="text-green-600 font-bold">
+                Condition : {product?.condition}
+              </p>
+
               <p>Meeting Location : {product?.location}</p>
               <p>Used : {product?.usage}</p>
               <div className="flex justify-between items-center">
