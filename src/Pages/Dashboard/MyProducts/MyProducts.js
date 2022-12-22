@@ -17,12 +17,15 @@ const MyProducts = () => {
   const handleDeleteProduct = (id) => {
     const agree = window.confirm("Sure? Want to delete");
     if (agree) {
-      fetch(`http://localhost:5000/cars/${id}?email=${user?.email}`, {
-        method: "DELETE",
-        headers: {
-          authorization: `bearer ${localStorage.getItem("carsLobbyToken")}`,
-        },
-      })
+      fetch(
+        `https://b612-used-products-resale-server-side-shariyer.vercel.app/cars/${id}?email=${user?.email}`,
+        {
+          method: "DELETE",
+          headers: {
+            authorization: `bearer ${localStorage.getItem("carsLobbyToken")}`,
+          },
+        }
+      )
         .then((res) => res.json())
         .then((data) => {
           console.log(data, "data of deleting");
@@ -37,7 +40,7 @@ const MyProducts = () => {
   // advertisement
   const handleAdvertise = (myProduct) => {
     fetch(
-      `http://localhost:5000/advertise/${myProduct._id}?email=${user?.email}`,
+      `https://b612-used-products-resale-server-side-shariyer.vercel.app/advertise/${myProduct._id}?email=${user?.email}`,
       {
         method: "POST",
         headers: {
@@ -56,12 +59,15 @@ const MyProducts = () => {
   };
   // stop advertisement
   const handleStopAdvertise = (id) => {
-    fetch(`http://localhost:5000/advertise/${id}?email=${user?.email}`, {
-      method: "DELETE",
-      headers: {
-        authorization: `bearer ${localStorage.getItem("carsLobbyToken")}`,
-      },
-    })
+    fetch(
+      `https://b612-used-products-resale-server-side-shariyer.vercel.app/advertise/${id}?email=${user?.email}`,
+      {
+        method: "DELETE",
+        headers: {
+          authorization: `bearer ${localStorage.getItem("carsLobbyToken")}`,
+        },
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         console.log(data, "data of deleting");

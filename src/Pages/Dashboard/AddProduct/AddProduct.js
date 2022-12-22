@@ -62,14 +62,19 @@ const AddProduct = () => {
             productStatus: "available",
             timeOfPosting: time,
           };
-          fetch(`http://localhost:5000/cars?email=${user?.email}`, {
-            method: "POST",
-            headers: {
-              "content-type": "application/json",
-              authorization: `bearer ${localStorage.getItem("carsLobbyToken")}`,
-            },
-            body: JSON.stringify(carInfo),
-          })
+          fetch(
+            `https://b612-used-products-resale-server-side-shariyer.vercel.app/cars?email=${user?.email}`,
+            {
+              method: "POST",
+              headers: {
+                "content-type": "application/json",
+                authorization: `bearer ${localStorage.getItem(
+                  "carsLobbyToken"
+                )}`,
+              },
+              body: JSON.stringify(carInfo),
+            }
+          )
             .then((res) => res.json())
             .then((data) => {
               console.log(data);

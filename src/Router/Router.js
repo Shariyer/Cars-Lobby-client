@@ -55,7 +55,9 @@ const router = createBrowserRouter([
       {
         path: "/category/:category",
         loader: async ({ params }) =>
-          fetch(`http://localhost:5000/cars?categoryName=${params.category}`),
+          fetch(
+            `https://b612-used-products-resale-server-side-shariyer.vercel.app/cars?categoryName=${params.category}`
+          ),
         element: (
           <PrivateRouter>
             <Products />

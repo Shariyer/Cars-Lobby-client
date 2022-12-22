@@ -18,14 +18,17 @@ const Products = () => {
   //   console.log("products are:", products);
 
   const handleReport = (product) => {
-    fetch(`http://localhost:5000/reports/${product._id}?email=${user?.email}`, {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-        authorization: `bearer ${localStorage.getItem("carsLobbyToken")}`,
-      },
-      body: JSON.stringify(product),
-    })
+    fetch(
+      `https://b612-used-products-resale-server-side-shariyer.vercel.app/reports/${product._id}?email=${user?.email}`,
+      {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+          authorization: `bearer ${localStorage.getItem("carsLobbyToken")}`,
+        },
+        body: JSON.stringify(product),
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         if (data.acknowledged) {

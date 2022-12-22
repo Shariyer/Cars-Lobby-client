@@ -19,7 +19,7 @@ const AllBuyers = () => {
     const agree = window.confirm("Sure? Want to delete");
     if (agree) {
       fetch(
-        `http://localhost:5000/users/allsellers/${id}?email=${user?.email}`,
+        `https://b612-used-products-resale-server-side-shariyer.vercel.app/users/allsellers/${id}?email=${user?.email}`,
         {
           method: "DELETE",
           headers: {

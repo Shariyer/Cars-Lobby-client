@@ -8,7 +8,9 @@ const useIsSeller = (email) => {
   useEffect(() => {
     if (email) {
       // route will change
-      fetch(`http://localhost:5000/users/seller/${email}`)
+      fetch(
+        `https://b612-used-products-resale-server-side-shariyer.vercel.app/users/seller/${email}`
+      )
         .then((res) => res.json())
         .then((data) => {
           // console.log(data);

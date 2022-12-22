@@ -52,11 +52,14 @@ const Login = () => {
       .then((result) => {
         const user = result.user;
         // console.log("Google Logged in user :", user);
-        fetch(`http://localhost:5000/users?email=${user?.email}`, {
-          headers: {
-            authorization: `bearer ${localStorage.getItem("carsLobbyToken")}`,
-          },
-        })
+        fetch(
+          `https://b612-used-products-resale-server-side-shariyer.vercel.app/users?email=${user?.email}`,
+          {
+            headers: {
+              authorization: `bearer ${localStorage.getItem("carsLobbyToken")}`,
+            },
+          }
+        )
           .then((res) => res.json())
           .then((data) => {
             console.log("data", data);
@@ -83,13 +86,16 @@ const Login = () => {
       userType,
     };
     console.log("inside db", user);
-    fetch("http://localhost:5000/users", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(user),
-    })
+    fetch(
+      "https://b612-used-products-resale-server-side-shariyer.vercel.app/users",
+      {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(user),
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         console.log(data);

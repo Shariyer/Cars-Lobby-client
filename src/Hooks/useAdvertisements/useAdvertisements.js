@@ -12,7 +12,7 @@ const useAdvertisements = (email) => {
     queryFn: async () => {
       try {
         const res = await fetch(
-          `http://localhost:5000/advertise?email=${email}`,
+          `https://b612-used-products-resale-server-side-shariyer.vercel.app/advertise?email=${email}`,
           {
             headers: {
               authorization: `bearer ${localStorage.getItem("carsLobbyToken")}`,

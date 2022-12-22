@@ -20,12 +20,15 @@ const MyOrders = () => {
   const handleDeleteOrder = (id) => {
     const agree = window.confirm("Sure? Want to delete");
     if (agree) {
-      fetch(`http://localhost:5000/bookings/${id}?email=${user?.email}`, {
-        method: "DELETE",
-        headers: {
-          authorization: `bearer ${localStorage.getItem("carsLobbyToken")}`,
-        },
-      })
+      fetch(
+        `https://b612-used-products-resale-server-side-shariyer.vercel.app/bookings/${id}?email=${user?.email}`,
+        {
+          method: "DELETE",
+          headers: {
+            authorization: `bearer ${localStorage.getItem("carsLobbyToken")}`,
+          },
+        }
+      )
         .then((res) => res.json())
         .then((data) => {
           console.log(data, "data of deleting");

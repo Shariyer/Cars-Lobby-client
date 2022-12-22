@@ -18,7 +18,7 @@ const AllSellers = () => {
     const agree = window.confirm("Sure? Want to delete");
     if (agree) {
       fetch(
-        `http://localhost:5000/users/allBuyers/${id}?email=${user?.email}`,
+        `https://b612-used-products-resale-server-side-shariyer.vercel.app/users/allBuyers/${id}?email=${user?.email}`,
         {
           method: "DELETE",
           headers: {
@@ -38,12 +38,15 @@ const AllSellers = () => {
   };
   // handle verify sellers
   const handleVerify = (id) => {
-    fetch(`http://localhost:5000/users/allSellers/${id}?email=${user?.email}`, {
-      method: "PUT",
-      headers: {
-        authorization: `bearer ${localStorage.getItem("carsLobbyToken")}`,
-      },
-    })
+    fetch(
+      `https://b612-used-products-resale-server-side-shariyer.vercel.app/users/allSellers/${id}?email=${user?.email}`,
+      {
+        method: "PUT",
+        headers: {
+          authorization: `bearer ${localStorage.getItem("carsLobbyToken")}`,
+        },
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         console.log(data, "verify seller");

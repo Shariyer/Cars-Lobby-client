@@ -33,14 +33,17 @@ const ProductsModal = ({ productModalData, setProductModalData }) => {
       customerMeetingLocation: customerMeetingLocation,
     };
     //  posting booking data
-    fetch(`http://localhost:5000/bookings?email=${user?.email}`, {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-        authorization: `bearer ${localStorage.getItem("carsLobbyToken")}`,
-      },
-      body: JSON.stringify(carBooking),
-    })
+    fetch(
+      `https://b612-used-products-resale-server-side-shariyer.vercel.app/bookings?email=${user?.email}`,
+      {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+          authorization: `bearer ${localStorage.getItem("carsLobbyToken")}`,
+        },
+        body: JSON.stringify(carBooking),
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         if (data.acknowledged) {

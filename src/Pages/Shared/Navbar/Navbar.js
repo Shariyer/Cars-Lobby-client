@@ -31,12 +31,11 @@ const Navbar = () => {
       <li>
         <Link to="/blog">Blog</Link>
 
-        <Link className="lg:block hidden" to="/dashboard">
-          Dashboard
-        </Link>
-
         {user?.uid ? (
           <>
+            <Link className="" to="/dashboard">
+              Dashboard
+            </Link>
             <button
               className="btn btn-outline text-primary rounded-2xl"
               onClick={handleLogOut}

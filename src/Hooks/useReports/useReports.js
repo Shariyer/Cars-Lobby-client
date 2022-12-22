@@ -11,7 +11,7 @@ const useReports = (email) => {
     queryFn: async (email) => {
       try {
         const res = await fetch(
-          `http://localhost:5000/reports?email=${email}`,
+          `https://b612-used-products-resale-server-side-shariyer.vercel.app/reports?email=${email}`,
           {
             headers: {
               authorization: `bearer ${localStorage.getItem("carsLobbyToken")}`,

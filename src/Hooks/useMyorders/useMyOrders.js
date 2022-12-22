@@ -12,7 +12,7 @@ const useMyOrders = (email) => {
     queryFn: async () => {
       try {
         const res = await fetch(
-          `http://localhost:5000/bookings?email=${email}`,
+          `https://b612-used-products-resale-server-side-shariyer.vercel.app/bookings?email=${email}`,
           {
             headers: {
               authorization: `bearer ${localStorage.getItem("carsLobbyToken")}`,
